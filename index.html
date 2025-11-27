@@ -8,42 +8,52 @@
     :root{--accent:#0b3b6f;--accent-2:#d92b2b;--muted:#666}
     body{font-family:Inter, system-ui, Arial, sans-serif;background:#f4f6f8;padding:20px;}
     .sheet{width:800px;background:white;margin:0 auto;padding:28px;box-shadow:0 6px 18px rgba(0,0,0,.08);}
+
     header{display:flex; gap:16px; align-items:center}
     .logo{width:100px;height:100px;background:#fff;display:flex;align-items:center;justify-content:center;border-radius:6px;overflow:hidden;flex-shrink:0;}
     .logo img{max-width:100%;max-height:100%;object-fit:contain}
+
     h1{margin:0;font-size:26px;color:var(--accent)}
     .meta{margin-left:auto;text-align:right;font-size:13px}
     label.small{display:block;font-size:12px;color:var(--muted)}
+
     .controls{display:flex;gap:10px;margin-top:16px}
-    .controls button{padding:10px 14px;border-radius:6px;border:1px solid #ddd;background:white;cursor:pointer;font-size:14px}
+    .controls button{
+      padding:10px 14px;border-radius:6px;border:1px solid #ddd;background:white;cursor:pointer;font-size:14px
+    }
+
     table{width:100%;border-collapse:collapse;margin-top:18px}
     thead th{background:var(--accent);color:white;padding:10px;font-size:14px}
     td,th{border:1px solid #e6e6e6;padding:10px;font-size:14px}
-    input[type="text"],input[type="number"],textarea{border:1px solid #ddd;padding:6px;border-radius:4px;font-size:14px}
+
+    input[type="text"],input[type="number"],textarea{
+      border:1px solid #ddd;padding:6px;border-radius:4px;font-size:14px
+    }
+
     textarea{width:100%;resize:vertical}
+
     .right{text-align:right}
+
     .totals{margin-top:18px;display:flex;justify-content:flex-end;gap:16px}
     .totals .box{min-width:260px;font-size:15px}
     .totals .line{display:flex;justify-content:space-between;padding:10px 12px;border-radius:6px}
     .totals .subtotal{background:#f7f7f7}
     .totals .grand{background:var(--accent);color:white;font-weight:700}
+
     .signbox{margin-top:30px;display:flex;justify-content:space-between;align-items:center}
     .signbox .left{font-size:14px;color:var(--muted)}
     .signbox .right{text-align:center}
     .signbox img{width:120px;height:120px;object-fit:contain;border:1px solid #eee;background:#fff;padding:6px}
+
     footer{margin-top:30px;font-size:14px;color:var(--muted)}
 
-    /* ------------ FIX: warna header biru ikut tercetak ------------ */
     @media print {
       body{background:white}
       .sheet{box-shadow:none;width:100%;padding:0}
       .controls{display:none}
-
       thead th {
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
-        background: var(--accent) !important;
-        color: white !important;
       }
     }
   </style>
@@ -89,6 +99,7 @@
       <button onclick="resetRows()">Reset</button>
       <button onclick="generateInvoiceNo(true)">Regenerate No</button>
       <button onclick="window.print()">Print / Save PDF</button>
+      <button onclick="saveToSheet()" style="background:#0b3b6f;color:white">💾 Simpan</button>
     </div>
 
     <table id="itemsTable">
@@ -140,6 +151,8 @@
   </div>
 
 <script>
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyzIOwhLtxcoJ5QhRN_OF68wvXgxRBP_kstGE9tdBJF0GAWpaZtq-rAZJgaJ6qQFRqi/exec";   // 🔥 GANTI DENGAN URL WEB APP MU
+
 function pad(n,len=2){ n=String(n); while(n.length<len) n='0'+n; return n; }
 function nowParts(){
   const d=new Date();
@@ -152,10 +165,7 @@ function nowParts(){
     yyyy: d.getFullYear()
   };
 }
-function escapeHtml(s){
-  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
-         .replace(/"/g,'&quot;');
-}
+
 function formatCurrency(n){ return 'Rp' + Number(n||0).toLocaleString('id-ID'); }
 
 let seq = 1;
@@ -171,8 +181,7 @@ function generateInvoiceNo(forceNew){
     `${p.dd}-${p.mmth}-${p.yyyy} ${p.hh}:${p.mm}:${p.ss}`;
   localStorage.setItem('cbs_seq', String(seq+1));
 
-  const qrText =
-`NOTA: ${inv}
+  const qrText = `NOTA: ${inv}
 Tanggal: ${p.dd}-${p.mmth}-${p.yyyy} ${p.hh}:${p.mm}:${p.ss}
 Penandatangan: Agung Dermawan
 Issuer: Ghe Art Sticker`;
@@ -187,55 +196,100 @@ function generateQRCodeTTD(text){
   document.getElementById('qrTTD').src = url;
 }
 
-function addRow(data={name:'', price:0, qty:1}){
+function addRow(data={name:'', price:0, qty:1}) {
   const tbody = document.querySelector('#itemsTable tbody');
   const idx = tbody.children.length + 1;
   const tr = document.createElement('tr');
   tr.innerHTML = `
     <td class="right">${idx}</td>
-    <td><input type="text" class="name" value="${escapeHtml(data.name)}" oninput="recalc()"></td>
-    <td><input type="number" class="price right" value="${Number(data.price)||0}" min="0" oninput="recalc()"></td>
-    <td><input type="number" class="qty right" value="${Number(data.qty)||1}" min="1" oninput="recalc()"></td>
+    <td><input type="text" value="${data.name}"></td>
+    <td><input type="number" value="${data.price}" oninput="recalc()"></td>
+    <td><input type="number" value="${data.qty}" oninput="recalc()"></td>
     <td class="right totalCell">Rp0</td>
   `;
   tbody.appendChild(tr);
   recalc();
 }
 
+function resetRows(){
+  document.querySelector('#itemsTable tbody').innerHTML = "";
+  addRow();
+  recalc();
+}
+
 function recalc(){
   const rows = document.querySelectorAll('#itemsTable tbody tr');
   let subtotal = 0;
+
   rows.forEach(r=>{
-    const price = Number(r.querySelector('.price').value) || 0;
-    const qty = Number(r.querySelector('.qty').value) || 0;
-    const total = Math.round(price * qty);
-    r.querySelector('.totalCell').textContent = formatCurrency(total);
-    subtotal += total;
+    const price = Number(r.children[2].querySelector("input").value);
+    const qty   = Number(r.children[3].querySelector("input").value);
+    const tot   = price * qty;
+    subtotal   += tot;
+    r.querySelector('.totalCell').textContent = formatCurrency(tot);
   });
 
   document.getElementById('subtotal').textContent = formatCurrency(subtotal);
 
-  const discPct = Number(document.getElementById('discount').value) || 0;
-  const discPctClamped = Math.max(0, Math.min(100, discPct));
-  document.getElementById('discount').value = discPctClamped;
-
-  const discAmount = Math.round(subtotal * discPctClamped / 100);
-  const grand = subtotal - discAmount;
+  const disc = Number(document.getElementById('discount').value || 0);
+  const grand = subtotal - (subtotal * disc/100);
 
   document.getElementById('grandtotal').textContent = formatCurrency(grand);
 }
 
-function resetRows(){
-  const tbody = document.querySelector('#itemsTable tbody');
-  tbody.innerHTML = '';
-  addRow();
-  addRow();
+async function saveToSheet(){
+  const invoiceNo = document.getElementById('invoiceNo').textContent;
+  const tanggal   = document.getElementById('tanggal').textContent;
+  const nama      = document.getElementById('namaKonsumen').value;
+  const hp        = document.getElementById('hpKonsumen').value;
+  const catatan   = document.getElementById('catatan').value;
+
+  const rows = document.querySelectorAll('#itemsTable tbody tr');
+  let items = [];
+
+  rows.forEach(r=>{
+    items.push({
+      name: r.children[1].querySelector("input").value,
+      price: Number(r.children[2].querySelector("input").value),
+      qty: Number(r.children[3].querySelector("input").value),
+    });
+  });
+
+  const subtotal   = document.getElementById('subtotal').textContent;
+  const discount   = document.getElementById('discount').value;
+  const grandtotal = document.getElementById('grandtotal').textContent;
+
+  const payload = {
+    invoiceNo,
+    tanggal,
+    namaKonsumen: nama,
+    hpKonsumen: hp,
+    items,
+    subtotal,
+    discount,
+    grandtotal,
+    catatan
+  };
+
+  try{
+    const res = await fetch(SCRIPT_URL, {
+      method: "POST",
+      body: JSON.stringify(payload),
+      headers: {"Content-Type":"application/json"}
+    });
+
+    const txt = await res.text();
+    alert("Status: " + txt);
+
+  } catch(err){
+    alert("Error: " + err);
+  }
 }
 
-window.addEventListener('load', ()=>{
-  generateInvoiceNo(false);
-  resetRows();
-});
+window.onload = ()=>{
+  generateInvoiceNo();
+  addRow();
+};
 </script>
 
 </body>
