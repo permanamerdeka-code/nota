@@ -1,172 +1,143 @@
 <!doctype html>
 <html lang="id">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Nota Kontan - Ghe Art Sticker</title>
-  <style>
-    :root{--accent:#0b3b6f;--accent-2:#d92b2b;--muted:#666}
-    body{font-family:Inter, system-ui, Arial, sans-serif;background:#f4f6f8;padding:20px;}
-    .sheet{width:800px;background:white;margin:0 auto;padding:28px;box-shadow:0 6px 18px rgba(0,0,0,.08);}
-
-    header{display:flex; gap:16px; align-items:center}
-    .logo{width:100px;height:100px;background:#fff;display:flex;align-items:center;justify-content:center;border-radius:6px;overflow:hidden;flex-shrink:0;}
-    .logo img{max-width:100%;max-height:100%;object-fit:contain}
-
-    h1{margin:0;font-size:26px;color:var(--accent)}
-    .meta{margin-left:auto;text-align:right;font-size:13px}
-    label.small{display:block;font-size:12px;color:var(--muted)}
-
-    .controls{display:flex;gap:10px;margin-top:16px}
-    .controls button{
-      padding:10px 14px;border-radius:6px;border:1px solid #ddd;background:white;cursor:pointer;font-size:14px
-    }
-
-    table{width:100%;border-collapse:collapse;margin-top:18px}
-    thead th{background:var(--accent);color:white;padding:10px;font-size:14px}
-    td,th{border:1px solid #e6e6e6;padding:10px;font-size:14px}
-
-    input[type="text"],input[type="number"],textarea{
-      border:1px solid #ddd;padding:6px;border-radius:4px;font-size:14px
-    }
-
-    textarea{width:100%;resize:vertical}
-
-    .right{text-align:right}
-
-    .totals{margin-top:18px;display:flex;justify-content:flex-end;gap:16px}
-    .totals .box{min-width:260px;font-size:15px}
-    .totals .line{display:flex;justify-content:space-between;padding:10px 12px;border-radius:6px}
-    .totals .subtotal{background:#f7f7f7}
-    .totals .grand{background:var(--accent);color:white;font-weight:700}
-
-    .signbox{margin-top:30px;display:flex;justify-content:space-between;align-items:center}
-    .signbox .left{font-size:14px;color:var(--muted)}
-    .signbox .right{text-align:center}
-    .signbox img{width:120px;height:120px;object-fit:contain;border:1px solid #eee;background:#fff;padding:6px}
-
-    footer{margin-top:30px;font-size:14px;color:var(--muted)}
-
-    @media print {
-      body{background:white}
-      .sheet{box-shadow:none;width:100%;padding:0}
-      .controls{display:none}
-      thead th {
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-      }
-    }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Nota Kontan - Ghe Art Sticker</title>
+<style>
+:root{--accent:#0b3b6f;--accent-2:#d92b2b;--muted:#666}
+body{font-family:Inter, system-ui, Arial, sans-serif;background:#f4f6f8;padding:20px;}
+.sheet{width:800px;background:white;margin:0 auto;padding:28px;box-shadow:0 6px 18px rgba(0,0,0,.08);}
+header{display:flex; gap:16px; align-items:center}
+.logo{width:100px;height:100px;background:#fff;display:flex;align-items:center;justify-content:center;border-radius:6px;overflow:hidden;flex-shrink:0;}
+.logo img{max-width:100%;max-height:100%;object-fit:contain}
+h1{margin:0;font-size:26px;color:var(--accent)}
+.meta{margin-left:auto;text-align:right;font-size:13px}
+label.small{display:block;font-size:12px;color:var(--muted)}
+.controls{display:flex;gap:10px;margin-top:16px}
+.controls button{padding:10px 14px;border-radius:6px;border:1px solid #ddd;background:white;cursor:pointer;font-size:14px}
+table{width:100%;border-collapse:collapse;margin-top:18px}
+thead th{background:var(--accent);color:white;padding:10px;font-size:14px}
+td,th{border:1px solid #e6e6e6;padding:10px;font-size:14px}
+input[type="text"],input[type="number"],textarea{border:1px solid #ddd;padding:6px;border-radius:4px;font-size:14px}
+textarea{width:100%;resize:vertical}
+.right{text-align:right}
+.totals{margin-top:18px;display:flex;justify-content:flex-end;gap:16px}
+.totals .box{min-width:260px;font-size:15px}
+.totals .line{display:flex;justify-content:space-between;padding:10px 12px;border-radius:6px}
+.totals .subtotal{background:#f7f7f7}
+.totals .grand{background:var(--accent);color:white;font-weight:700}
+.signbox{margin-top:30px;display:flex;justify-content:space-between;align-items:center}
+.signbox .left{font-size:14px;color:var(--muted)}
+.signbox .right{text-align:center}
+.signbox img{width:120px;height:120px;object-fit:contain;border:1px solid #eee;background:#fff;padding:6px}
+footer{margin-top:30px;font-size:14px;color:var(--muted)}
+@media print {
+  body{background:white}
+  .sheet{box-shadow:none;width:100%;padding:0}
+  .controls{display:none}
+  thead th {-webkit-print-color-adjust: exact !important; print-color-adjust: exact !important;}
+}
+</style>
 </head>
 <body>
 
-  <div class="sheet" id="sheet">
-
-    <header>
-      <div class="logo" id="logo">
-        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh1g3_OhZb0gQqihtvRurhtE6RbYWZqYd7X1Xr1ur0U6IKYNjupll_jvIAkLJH_p8H1HvPO-OiDxHE2Rg3F-JBzX_XIqmiPN398TipI3NbpqP14753wycGgknEhsGUeMLb2Q0X6-XjVRHW35ozdS_ErGUBXTMT_RO5yq2XJfgQAEfruB0FQvc9WZ4RCzTx5/s320/ChatGPT_Image_Nov_20__2025__05_47_53_PM-removebg-preview.png" alt="Logo">
-      </div>
-
-      <div>
-        <h1>Ghe Art Sticker</h1>
-        <div style="font-size:14px;color:var(--accent-2);font-weight:600">Powered by PT Cutting Sticker Indonesia</div>
-        <div style="font-size:14px;color:var(--muted);margin-top:6px">
-          Jl. Raya Curug - Kosambi, Sumur Kondang RT 001 RW 001,<br>
-          Kec. Klari, Karawang, Jawa Barat 41371
-        </div>
-        <div style="font-size:14px;color:var(--muted);margin-top:6px">
-          HP: 0812-5766-2020 / 0851-6104-2807
-        </div>
-      </div>
-
-      <div class="meta">
-        <label class="small">No. Nota</label>
-        <div id="invoiceNo" style="font-weight:700"></div>
-
-        <label class="small" style="margin-top:6px">Tanggal</label>
-        <div id="tanggal" style="font-weight:600"></div>
-
-        <label class="small" style="margin-top:10px">Nama Konsumen</label>
-        <input id="namaKonsumen" type="text" style="width:160px">
-
-        <label class="small" style="margin-top:6px">No HP Konsumen</label>
-        <input id="hpKonsumen" type="text" style="width:160px">
-      </div>
-    </header>
-
-    <div class="controls">
-      <button onclick="addRow()">Tambah Baris</button>
-      <button onclick="resetRows()">Reset</button>
-      <button onclick="generateInvoiceNo(true)">Regenerate No</button>
-      <button onclick="window.print()">Print / Save PDF</button>
-      <button onclick="saveToSheet()" style="background:#0b3b6f;color:white">💾 Simpan</button>
-    </div>
-
-    <table id="itemsTable">
-      <thead>
-        <tr>
-          <th style="width:50px">No</th>
-          <th>Nama Jasa</th>
-          <th style="width:150px">Harga Satuan (Rp)</th>
-          <th style="width:120px">Jumlah</th>
-          <th style="width:150px">Total (Rp)</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-
-    <div class="totals">
-      <div class="box">
-        <div class="line subtotal">
-          <div>Subtotal</div>
-          <div id="subtotal">Rp0</div>
-        </div>
-        <div class="line" style="margin-top:6px">
-          <div>Diskon</div>
-          <div><input id="discount" type="number" value="0" min="0" style="width:90px" oninput="recalc()"> %</div>
-        </div>
-        <div class="line grand" style="margin-top:8px">
-          <div>TOTAL</div>
-          <div id="grandtotal">Rp0</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="signbox">
-      <div class="left">
-        Pembayaran via Transfer:<br>
-        <b>BCA 8695076572 a.n. Agung Dermawan</b>
-      </div>
-      <div class="right">
-        <div style="margin-bottom:6px;font-weight:600">Ditandatangani oleh:<br>Agung Dermawan</div>
-        <img id="qrTTD" src="" alt="QR Tanda Tangan" />
-      </div>
-    </div>
-
-    <footer>
-      <label class="small">Catatan:</label>
-      <textarea id="catatan" style="height:90px"></textarea>
-    </footer>
-
+<div class="sheet" id="sheet">
+<header>
+  <div class="logo" id="logo">
+    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh1g3_OhZb0gQqihtvRurhtE6RbYWZqYd7X1Xr1ur0U6IKYNjupll_jvIAkLJH_p8H1HvPO-OiDxHE2Rg3F-JBzX_XIqmiPN398TipI3NbpqP14753wycGgknEhsGUeMLb2Q0X6-XjVRHW35ozdS_ErGUBXTMT_RO5yq2XJfgQAEfruB0FQvc9WZ4RCzTx5/s320/ChatGPT_Image_Nov_20__2025__05_47_53_PM-removebg-preview.png" alt="Logo">
   </div>
 
-<script>
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyzIOwhLtxcoJ5QhRN_OF68wvXgxRBP_kstGE9tdBJF0GAWpaZtq-rAZJgaJ6qQFRqi/exec";   // 🔥 GANTI DENGAN URL WEB APP MU
+  <div>
+    <h1>Ghe Art Sticker</h1>
+    <div style="font-size:14px;color:var(--accent-2);font-weight:600">Powered by PT Cutting Sticker Indonesia</div>
+    <div style="font-size:14px;color:var(--muted);margin-top:6px">
+      Jl. Raya Curug - Kosambi, Sumur Kondang RT 001 RW 001,<br>
+      Kec. Klari, Karawang, Jawa Barat 41371
+    </div>
+    <div style="font-size:14px;color:var(--muted);margin-top:6px">
+      HP: 0812-5766-2020 / 0851-6104-2807
+    </div>
+  </div>
 
-function pad(n,len=2){ n=String(n); while(n.length<len) n='0'+n; return n; }
+  <div class="meta">
+    <label class="small">No. Nota</label>
+    <div id="invoiceNo" style="font-weight:700"></div>
+
+    <label class="small" style="margin-top:6px">Tanggal</label>
+    <div id="tanggal" style="font-weight:600"></div>
+
+    <label class="small" style="margin-top:10px">Nama Konsumen</label>
+    <input id="namaKonsumen" type="text" style="width:160px">
+
+    <label class="small" style="margin-top:6px">No HP Konsumen</label>
+    <input id="hpKonsumen" type="text" style="width:160px">
+  </div>
+</header>
+
+<div class="controls">
+  <button onclick="addRow()">Tambah Baris</button>
+  <button onclick="resetRows()">Reset</button>
+  <button onclick="generateInvoiceNo(true)">Regenerate No</button>
+  <button onclick="printAndSave()">Print / Save PDF</button>
+</div>
+
+<table id="itemsTable">
+  <thead>
+    <tr>
+      <th style="width:50px">No</th>
+      <th>Nama Jasa</th>
+      <th style="width:150px">Harga Satuan (Rp)</th>
+      <th style="width:120px">Jumlah</th>
+      <th style="width:150px">Total (Rp)</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+<div class="totals">
+  <div class="box">
+    <div class="line subtotal">
+      <div>Subtotal</div>
+      <div id="subtotal">Rp0</div>
+    </div>
+    <div class="line" style="margin-top:6px">
+      <div>Diskon</div>
+      <div><input id="discount" type="number" value="0" min="0" style="width:90px" oninput="recalc()"> %</div>
+    </div>
+    <div class="line grand" style="margin-top:8px">
+      <div>TOTAL</div>
+      <div id="grandtotal">Rp0</div>
+    </div>
+  </div>
+</div>
+
+<div class="signbox">
+  <div class="left">
+    Pembayaran via Transfer:<br>
+    <b>BCA 8695076572 a.n. Agung Dermawan</b>
+  </div>
+  <div class="right">
+    <div style="margin-bottom:6px;font-weight:600">Ditandatangani oleh:<br>Agung Dermawan</div>
+    <img id="qrTTD" src="" alt="QR Tanda Tangan" />
+  </div>
+</div>
+
+<footer>
+  <label class="small">Catatan:</label>
+  <textarea id="catatan" style="height:90px"></textarea>
+</footer>
+</div>
+
+<script>
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyzIOwhLtxcoJ5QhRN_OF68wvXgxRBP_kstGE9tdBJF0GAWpaZtq-rAZJgaJ6qQFRqi/exec";
+
+function pad(n,len=2){n=String(n);while(n.length<len)n='0'+n;return n;}
 function nowParts(){
   const d=new Date();
-  return {
-    hh: pad(d.getHours(),2),
-    mm: pad(d.getMinutes(),2),
-    ss: pad(d.getSeconds(),2),
-    dd: pad(d.getDate(),2),
-    mmth: pad(d.getMonth()+1,2),
-    yyyy: d.getFullYear()
-  };
+  return {hh:pad(d.getHours()), mm:pad(d.getMinutes()), ss:pad(d.getSeconds()), dd:pad(d.getDate()), mmth:pad(d.getMonth()+1), yyyy:d.getFullYear()};
 }
-
-function formatCurrency(n){ return 'Rp' + Number(n||0).toLocaleString('id-ID'); }
+function formatCurrency(n){return 'Rp'+Number(n||0).toLocaleString('id-ID');}
 
 let seq = 1;
 function generateInvoiceNo(forceNew){
@@ -177,120 +148,73 @@ function generateInvoiceNo(forceNew){
   const p = nowParts();
   const inv = `${pad(seq,3)}/${p.hh}${p.mm}${p.ss}/${p.dd}${p.mmth}/CBS/${p.yyyy}`;
   document.getElementById('invoiceNo').textContent = inv;
-  document.getElementById('tanggal').textContent =
-    `${p.dd}-${p.mmth}-${p.yyyy} ${p.hh}:${p.mm}:${p.ss}`;
+  document.getElementById('tanggal').textContent = `${p.dd}-${p.mmth}-${p.yyyy} ${p.hh}:${p.mm}:${p.ss}`;
   localStorage.setItem('cbs_seq', String(seq+1));
-
-  const qrText = `NOTA: ${inv}
-Tanggal: ${p.dd}-${p.mmth}-${p.yyyy} ${p.hh}:${p.mm}:${p.ss}
-Penandatangan: Agung Dermawan
-Issuer: Ghe Art Sticker`;
-
+  const qrText = `NOTA: ${inv}\nTanggal: ${p.dd}-${p.mmth}-${p.yyyy} ${p.hh}:${p.mm}:${p.ss}\nPenandatangan: Agung Dermawan\nIssuer: Ghe Art Sticker`;
   generateQRCodeTTD(qrText);
 }
 
 function generateQRCodeTTD(text){
   const size = 200;
-  const url =
-    `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encodeURIComponent(text)}`;
+  const url = `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encodeURIComponent(text)}`;
   document.getElementById('qrTTD').src = url;
 }
 
-function addRow(data={name:'', price:0, qty:1}) {
+function addRow(data={name:'', price:0, qty:1}){
   const tbody = document.querySelector('#itemsTable tbody');
   const idx = tbody.children.length + 1;
   const tr = document.createElement('tr');
-  tr.innerHTML = `
-    <td class="right">${idx}</td>
-    <td><input type="text" value="${data.name}"></td>
-    <td><input type="number" value="${data.price}" oninput="recalc()"></td>
-    <td><input type="number" value="${data.qty}" oninput="recalc()"></td>
-    <td class="right totalCell">Rp0</td>
-  `;
+  tr.innerHTML = `<td>${idx}</td><td><input class="name" type="text" value="${data.name}"></td><td><input class="price" type="number" value="${data.price}" oninput="recalc()"></td><td><input class="qty" type="number" value="${data.qty}" min="1" oninput="recalc()"></td><td class="right total">Rp0</td>`;
   tbody.appendChild(tr);
   recalc();
 }
 
-function resetRows(){
-  document.querySelector('#itemsTable tbody').innerHTML = "";
-  addRow();
-  recalc();
-}
+function resetRows(){document.querySelector('#itemsTable tbody').innerHTML=''; addRow();}
 
 function recalc(){
-  const rows = document.querySelectorAll('#itemsTable tbody tr');
-  let subtotal = 0;
-
-  rows.forEach(r=>{
-    const price = Number(r.children[2].querySelector("input").value);
-    const qty   = Number(r.children[3].querySelector("input").value);
-    const tot   = price * qty;
-    subtotal   += tot;
-    r.querySelector('.totalCell').textContent = formatCurrency(tot);
+  let subtotal=0;
+  document.querySelectorAll('#itemsTable tbody tr').forEach(row=>{
+    const price=row.querySelector('.price').value*1;
+    const qty=row.querySelector('.qty').value*1;
+    const total=price*qty;
+    row.querySelector('.total').textContent=formatCurrency(total);
+    subtotal+=total;
   });
-
-  document.getElementById('subtotal').textContent = formatCurrency(subtotal);
-
-  const disc = Number(document.getElementById('discount').value || 0);
-  const grand = subtotal - (subtotal * disc/100);
-
-  document.getElementById('grandtotal').textContent = formatCurrency(grand);
+  document.getElementById('subtotal').textContent=formatCurrency(subtotal);
+  const disc=document.getElementById('discount').value*1;
+  const grand=subtotal-(subtotal*disc/100);
+  document.getElementById('grandtotal').textContent=formatCurrency(grand);
 }
 
 async function saveToSheet(){
-  const invoiceNo = document.getElementById('invoiceNo').textContent;
-  const tanggal   = document.getElementById('tanggal').textContent;
-  const nama      = document.getElementById('namaKonsumen').value;
-  const hp        = document.getElementById('hpKonsumen').value;
-  const catatan   = document.getElementById('catatan').value;
-
-  const rows = document.querySelectorAll('#itemsTable tbody tr');
-  let items = [];
-
+  const invoiceNo=document.getElementById("invoiceNo").textContent;
+  const tanggal=document.getElementById("tanggal").textContent;
+  const namaKonsumen=document.getElementById("namaKonsumen").value;
+  const hpKonsumen=document.getElementById("hpKonsumen").value;
+  const subtotal=document.getElementById("subtotal").textContent.replace(/Rp|\.|,/g,"")*1;
+  const discount=document.getElementById("discount").value*1;
+  const grandtotal=document.getElementById("grandtotal").textContent.replace(/Rp|\.|,/g,"")*1;
+  const catatan=document.getElementById("catatan").value;
+  const rows=document.querySelectorAll("#itemsTable tbody tr");
+  const items=[];
   rows.forEach(r=>{
     items.push({
-      name: r.children[1].querySelector("input").value,
-      price: Number(r.children[2].querySelector("input").value),
-      qty: Number(r.children[3].querySelector("input").value),
+      name:r.querySelector(".name").value,
+      price:r.querySelector(".price").value*1,
+      qty:r.querySelector(".qty").value*1,
+      total:r.querySelector(".price").value*1*r.querySelector(".qty").value*1
     });
   });
-
-  const subtotal   = document.getElementById('subtotal').textContent;
-  const discount   = document.getElementById('discount').value;
-  const grandtotal = document.getElementById('grandtotal').textContent;
-
-  const payload = {
-    invoiceNo,
-    tanggal,
-    namaKonsumen: nama,
-    hpKonsumen: hp,
-    items,
-    subtotal,
-    discount,
-    grandtotal,
-    catatan
-  };
-
-  try{
-    const res = await fetch(SCRIPT_URL, {
-      method: "POST",
-      body: JSON.stringify(payload),
-      headers: {"Content-Type":"application/json"}
-    });
-
-    const txt = await res.text();
-    alert("Status: " + txt);
-
-  } catch(err){
-    alert("Error: " + err);
-  }
+  const payload={invoiceNo,tanggal,namaKonsumen,hpKonsumen,items,subtotal,discount,grandtotal,catatan};
+  try{await fetch(SCRIPT_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});}catch(e){console.error(e);}
 }
 
-window.onload = ()=>{
-  generateInvoiceNo();
+async function printAndSave(){await saveToSheet(); setTimeout(()=>{window.print();},500);}
+
+window.onload=()=>{
+  generateInvoiceNo(false);
   addRow();
 };
 </script>
-
 </body>
 </html>
